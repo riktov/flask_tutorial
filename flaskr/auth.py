@@ -32,7 +32,7 @@ def register():
                 (username, generate_password_hash(password))
             )
             db.commit()
-            return redirect(url_for('auth_login'))
+            return redirect(url_for('auth.login'))
         
         flash(error)
 
@@ -74,7 +74,8 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
 
-@bp.route('/logout'):
+@bp.route('/logout')
+def logout():
     session.clear()
     return redirect(url_for('index'))
 
